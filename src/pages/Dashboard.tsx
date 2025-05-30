@@ -37,30 +37,6 @@ const Dashboard = () => {
           <p className="text-sm sm:text-base text-gray-600">Pregled stanja vaše pametne bašte</p>
         </div>
 
-        {/* Devices Status */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          {devices.map((device) => (
-            <div key={device.id} className={`p-4 rounded-lg ${device.color}`}>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-white rounded-lg">
-                    {device.icon}
-                  </div>
-                  <div>
-                    <h4 className="font-medium">{device.name}</h4>
-                    <div className="flex items-center space-x-1 text-sm">
-                      <span className="capitalize">{device.status}</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="text-lg font-semibold">
-                  {device.value} {device.unit}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* Sensor Cards - 2x2 grid on mobile */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
           <SensorCard
@@ -103,6 +79,30 @@ const Dashboard = () => {
             color="bg-orange-500/20"
             optimal={true}
           />
+        </div>
+
+        {/* Devices Status */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          {devices.map((device) => (
+            <div key={device.id} className={`p-4 rounded-lg ${device.color}`}>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 bg-white rounded-lg">
+                    {device.icon}
+                  </div>
+                  <div>
+                    <h4 className="font-medium">{device.name}</h4>
+                    <div className="flex items-center space-x-1 text-sm">
+                      <span className="capitalize">{device.status}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-lg font-semibold">
+                  {device.value} {device.unit}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Combined Controls */}
