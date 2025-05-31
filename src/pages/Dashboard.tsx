@@ -14,8 +14,8 @@ const Dashboard = () => {
       type: 'actuator',
       status: 'online',
       value: 'ON',
-      icon: <RefreshCw className="h-5 w-5" />,
-      color: 'bg-blue-100 text-blue-800 border-blue-200'
+      icon: <Activity className="h-5 w-5" />,
+      color: 'bg-red-100 text-red-800 border-red-200'
     },
     {
       id: 'pump1',
@@ -37,8 +37,42 @@ const Dashboard = () => {
           <p className="text-sm sm:text-base text-gray-600">Pregled stanja vaše pametne bašte</p>
         </div>
 
+        {/* Devices Status */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          {devices.map((device) => (
+            <div key={device.id} className={`p-4 rounded-lg ${device.color}`}>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 bg-white rounded-lg">
+                    {device.icon}
+                  </div>
+                  <div>
+                    <h4 className="font-medium">{device.name}</h4>
+                    <div className="flex items-center space-x-1 text-sm">
+                      <span className="capitalize">{device.status}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-lg font-semibold">
+                  {device.value} {device.unit}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
         {/* Sensor Cards - 2x2 grid on mobile */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
+          <SensorCard
+            title="Vlažnost zemljišta"
+            value="68"
+            unit="%"
+            trend="down"
+            trendValue="-5%"
+            icon={<Droplets className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />}
+            color="bg-blue-500/20"
+            optimal={true}
+          />
           <SensorCard
             title="Svetlost"
             value="850"
@@ -69,38 +103,6 @@ const Dashboard = () => {
             color="bg-orange-500/20"
             optimal={true}
           />
-        </div>
-
-        {/* Devices Status */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          {devices.map((device) => (
-            <div key={device.id} className={`p-4 rounded-lg ${device.color}`}>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-white rounded-lg">
-                    {device.icon}
-                  </div>
-                  <div>
-                    <h4 className="font-medium">{device.name}</h4>
-                    <div className="flex items-center space-x-1 text-sm">
-                      <span className="capitalize">{device.status}</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="text-lg font-semibold">
-                  <button
-                    className={`px-4 py-2 rounded-lg transition-colors ${
-                      device.value === 'ON' 
-                        ? 'bg-red-600 text-white hover:bg-red-700' 
-                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                    }`}
-                  >
-                    {device.value}
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
 
         {/* Combined Controls */}
